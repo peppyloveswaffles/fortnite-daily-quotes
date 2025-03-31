@@ -1,0 +1,114 @@
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Daily Fortnite Love</title>
+  <link href="https://fonts.googleapis.com/css2?family=Pacifico&display=swap" rel="stylesheet">
+  <style>
+    body {
+      font-family: 'Arial', sans-serif;
+      background-color: #ffe6f0;
+      color: #5c0036;
+      text-align: center;
+      padding: 40px;
+    }
+    .quote-box {
+      background-color: #fff0f5;
+      padding: 30px;
+      border-radius: 15px;
+      max-width: 700px;
+      margin: 30px auto;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      font-size: 1.6em;
+      font-family: 'Pacifico', cursive;
+    }
+    .countdown-box {
+      font-size: 1.1em;
+      background-color: #ffcce6;
+      padding: 15px;
+      border-radius: 10px;
+      max-width: 400px;
+      margin: 0 auto 20px;
+      box-shadow: 0 3px 6px rgba(0,0,0,0.1);
+    }
+  </style>
+</head>
+<body>
+  <h1>Daily Fortnite Love</h1>
+  <div class="countdown-box" id="countdown">Calculating time until next quote...</div>
+  <div class="quote-box" id="quoteBox">Loading quote...</div>
+
+  <script>
+    const quotes = [
+      "You’re my favorite teammate, in Fortnite and in life.",
+      "I’d carry you any day—emotionally and in the game.",
+      "You’re the only Victory Royale I’ll ever need.",
+      "I'd drop Tilted for you, even if it's hot.",
+      "No reboot van could ever replace you.",
+      "You're my legendary loot in a world of commons.",
+      "Our love? Stronger than full shield + full health.",
+      "You’re the duo I’ll queue with forever.",
+      "Even in the storm, I’d stay with you.",
+      "I’d trade my gold scar for one more game with you.",
+      "You had me at 'Let’s drop together.'",
+      "You're cracked—at Fortnite and at stealing my heart.",
+      "Even when you steal all the minis, I still love you.",
+      "We may not always win, but at least we’re losing together.",
+      "You're the only reason I don’t rage quit.",
+      "You revive my heart faster than a reboot card.",
+      "Our bond’s tighter than my edit binds.",
+      "Who needs aim assist when I’ve got you?",
+      "Love you more than I love skybasing at end game.",
+      "I’d never third-party your heart.",
+      "We built this love brick by brick, just like a 1v1 tower.",
+      "Our chemistry is better than a loadout with a pump and an AR.",
+      "Even if I get knocked, I know you’ll be there to revive me.",
+      "No storm circle could pull me away from you.",
+      "I’d build you a skybase to the stars.",
+      "Your love hits harder than a gold shotgun.",
+      "You’re not just a skin—I see your soul.",
+      "If love was a loot drop, you’d be mythic.",
+      "No matchmaking algorithm could’ve done better.",
+      "We’re end game. Always have been."
+    ];
+
+    const startDate = new Date("2025-03-31T21:15:00Z");
+
+    function updateQuote() {
+      const now = new Date();
+      const quoteBox = document.getElementById("quoteBox");
+      const countdownBox = document.getElementById("countdown");
+
+      let dayIndex = Math.floor((now - startDate) / (1000 * 60 * 60 * 24));
+      let quoteTime = new Date(startDate.getTime() + dayIndex * 24 * 60 * 60 * 1000);
+
+      if (now < quoteTime) {
+        dayIndex -= 1;
+        quoteTime = new Date(quoteTime.getTime() - 24 * 60 * 60 * 1000);
+      }
+
+      const nextUnlock = new Date(quoteTime.getTime() + 24 * 60 * 60 * 1000);
+      const timeLeft = nextUnlock - now;
+
+      if (dayIndex < 0) {
+        quoteBox.innerText = "Quotes will begin unlocking on March 31, 2025 💌";
+      } else if (dayIndex >= quotes.length) {
+        quoteBox.innerText = "That was the last quote... but not the last day I’ll love you 💖";
+      } else {
+        quoteBox.innerText = quotes[dayIndex];
+      }
+
+      const hours = Math.floor((timeLeft / (1000 * 60 * 60)) % 24);
+      const minutes = Math.floor((timeLeft / (1000 * 60)) % 60);
+      const seconds = Math.floor((timeLeft / 1000) % 60);
+
+      countdownBox.innerText = `Next quote unlocks in ${hours}h ${minutes}m ${seconds}s (5:15 PM New York Time)`;
+    }
+
+    updateQuote();
+    setInterval(updateQuote, 1000);
+  </script>
+</body>
+</html>
